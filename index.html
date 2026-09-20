@@ -33,7 +33,7 @@
             QUANTUM INTELLIGENCE GAMES SUITE
         </h1>
         <p class="text-slate-400 max-w-2xl mx-auto text-sm">
-            An interactive, high-performance simulation suite driving Quantum Chess, Quantum Sudoku, and Quantum Minesweeper coupled with live client-side Quantum core logic simulation.
+            An interactive, high-performance simulation suite driving Quantum Chess, Quantum Sudoku, and Quantum Minesweeper coupled with a native HTML5 Canvas hardware-accelerated state visualizer.
         </p>
     </header>
 
@@ -72,10 +72,10 @@
                     <div class="flex justify-between"><span class="text-slate-500">System Entropy Status:</span> <span id="metric-entropy" class="text-purple-400 font-bold">SUPERPOSITION ACTIVE</span></div>
                 </div>
 
-                <!-- Real-time Chart Canvas Mapping -->
+                <!-- Real-time Native HTML5 Canvas Mapping (Zero External Dependencies) -->
                 <h3 class="text-sm font-bold text-slate-400 mb-2 font-mono">Wave Function Probability Amplitude Matrix:</h3>
                 <div class="bg-slate-950 p-4 rounded-lg w-full h-48 relative flex items-center justify-center">
-                    <canvas id="wave-function-chart" class="w-full h-full"></canvas>
+                    <canvas id="quantum-native-canvas" class="w-full h-full"></canvas>
                 </div>
             </div>
 
@@ -87,52 +87,77 @@
         </section>
 
     </main>
-
-    <!-- Embedded Chart.js Core Library Script to entirely prevent CORS Blocks -->
+    <!-- Native JavaScript Simulation & Core Graphics Engine Layer -->
     <script>
-        /*! Chart.js v2.9.4 Embedded Core Code Layer */
-        !function(t,e){"object"==typeof exports&&"undefined"!=typeof module?module.exports=e():"function"==typeof define&&define.amd?define(e):(t="undefined"!=typeof globalThis?globalThis:t||self).Chart=e()}(this,(function(){"use strict";return function(t){var e={};function n(r){if(e[r])return e[r].exports;var i=e[r]={i:r,l:!1,exports:{}};return t[r].call(i.exports,i,i.exports,n),i.l=!0,i.exports}return n.m=t,n.c=e,n.d=function(t,e,r){n.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:e})},n.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},n.t=function(t,e){if(1&e&&(t=n(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var r=Object.create(null);if(n.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var i in t)n.d(r,i,function(e){return t[e]}.bind(null,i));return r},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,"a",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p="",n(n.s=0)}([function(t,e,n){var r=function(t,e){this.construct(t,e)};return r.prototype={construct:function(t,e){this.ctx=t.getContext("2d"),this.canvas=t,this.config=e||{},this.data=e.data||{},this.options=e.options||{},this.init()},init:function(){var t=this;return t.data.datasets=t.data.datasets||[],t.ctx.clearRect(0,0,t.canvas.width,t.canvas.height),t.draw(),t},update:function(){this.init()},draw:function(){var t=this,e=t.ctx,n=t.canvas.width,r=t.canvas.height;e.clearRect(0,0,n,r),e.strokeStyle=t.data.datasets[0].borderColor||"#6366f1",e.lineWidth=t.data.datasets[0].borderWidth||2,e.beginPath();var i=t.data.datasets[0].data||[];i.forEach((function(t,i){var o=i*(n/(scale_len||8)),a=r-t*(r-40)-20;0===i?e.moveTo(o,a):e.lineTo(o,a)})),e.stroke();var scale_len=i.length;i.forEach((function(t,i){var o=i*(n/(scale_len||8)),a=r-t*(r-40)-20;e.fillStyle="#94a3b8",e.fillText("P"+(i+1),o,r-4)}))}},r}]);}));
-    </script>
-        <!-- Embedded Client-Side Simulation & State Logic Layer -->
-    <script>
-        let liveChart = null;
         let currentActiveGame = 'chess';
         
-        // Client-side abstract state registries to replace app.py
+        // Client-side structural state arrays to substitute Python app.py
         let chessBoardState = Array(64).fill(null);
-        let minesweeperState = Array(100).fill(null); // null: hidden, 0: empty, 1: mine
+        let minesweeperState = Array(100).fill(null); // null: hidden, 0: safe, 1: mine
         let sudokuState = Array(81).fill(0);
+        
+        // Active probability array to map live state visualization loops
+        let currentQuantumProbabilities = [0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125];
 
-        // Standardized abstraction layer for embedded Chart execution pipeline
-        function initObserverChart() {
-            try {
-                const canvas = document.getElementById('wave-function-chart');
-                if (!canvas) return;
+        // High-performance hardware-accelerated raw HTML5 Canvas renderer loop
+        function drawNativeQuantumChart() {
+            const canvas = document.getElementById('quantum-native-canvas');
+            if (!canvas) return;
 
-                // Bind the embedded custom lightweight canvas renderer
-                liveChart = new Chart(canvas, {
-                    type: 'line',
-                    data: {
-                        datasets: {
-                            data: [0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125],
-                            borderColor: '#6366f1',
-                            borderWidth: 2
-                        }
-                    }
-                });
-            } catch (e) {
-                console.error("Runtime Exception: Chart canvas initialization pipeline blocked.", e);
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return;
+
+            // Compute dynamic client container layout paths
+            const width = canvas.clientWidth;
+            const height = canvas.clientHeight;
+            canvas.width = width;
+            canvas.height = height;
+
+            // Clear previous buffer frame fully
+            ctx.clearRect(0, 0, width, height);
+
+            const numBars = currentQuantumProbabilities.length;
+            const padding = 6;
+            const barWidth = (width - (padding * (numBars + 1))) / numBars;
+
+            // Draw real-time probability amplitudes
+            for (let i = 0; i < numBars; i++) {
+                const prob = currentQuantumProbabilities[i];
+                const barHeight = prob * (height - 30);
+                const x = padding + i * (barWidth + padding);
+                const y = height - 20 - barHeight;
+
+                // Cyberpunk neon gradient compilation path
+                const gradient = ctx.createLinearGradient(x, y, x, height - 20);
+                gradient.addColorStop(0, '#6366f1'); // Indigo glow
+                gradient.addColorStop(1, 'rgba(99, 102, 241, 0.05)');
+
+                ctx.fillStyle = gradient;
+                ctx.fillRect(x, y, barWidth, barHeight);
+
+                // Draw solid bar top lines for crisp visualization rendering
+                ctx.strokeStyle = '#818cf8';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(x + barWidth, y);
+                ctx.stroke();
+
+                // Inject text labels safely underneath the chart baseline
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = '10px monospace';
+                ctx.textAlign = 'center';
+                ctx.fillText(`P${i+1}`, x + (barWidth / 2), height - 6);
             }
         }
 
-        // Handles clicks and state mutations natively inside the viewport
+        // Handles clicks and localized state mutations natively inside the viewport
         function handleTileClick(index, targetElement) {
             console.log(`Dispatched local state interaction log at array index: [${index}]`);
-            if (!liveChart) return;
             
             if (currentActiveGame === 'chess') {
                 if (targetElement.innerText === 'wP?') {
-                    // Simulate a live quantum collapse event (50/50 probability)
+                    // Simulate a live quantum collapse event (50/50 probability mapping)
                     const collapsedPresent = Math.random() > 0.5;
                     targetElement.innerText = collapsedPresent ? 'wP' : '';
                     targetElement.classList.remove('bg-blue-900', 'border-blue-500');
@@ -141,11 +166,11 @@
                     document.getElementById('metric-entropy').innerText = "DETERMINISTIC STATE";
                     document.getElementById('metric-entropy').className = "text-emerald-400 font-bold";
                     
-                    // Collapse wave function chart to a pure localized spike
-                    liveChart.data.datasets.data = [0, 0, 1.0, 0, 0, 0, 0, 0];
-                    liveChart.update();
+                    // Collapse probability distribution to a localized sharp delta spike
+                    currentQuantumProbabilities = [0, 0, 1.0, 0, 0, 0, 0, 0];
+                    drawNativeQuantumChart();
                 } else if (targetElement.innerText === '') {
-                    // Inject a fresh superposition path mapping
+                    // Inject a fresh superposition state path mapping
                     targetElement.innerText = 'wP?';
                     targetElement.classList.add('bg-blue-900', 'text-blue-300', 'border', 'border-blue-500');
                     chessBoardState[index] = 'wP?';
@@ -153,11 +178,11 @@
                     document.getElementById('metric-entropy').innerText = "SUPERPOSITION ACTIVE";
                     document.getElementById('metric-entropy').className = "text-purple-400 font-bold";
                     
-                    liveChart.data.datasets.data = [0.2, 0.3, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0];
-                    liveChart.update();
+                    currentQuantumProbabilities = [0.2, 0.3, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0];
+                    drawNativeQuantumChart();
                 }
             } else if (currentActiveGame === 'sudoku') {
-                // Multi-state validation simulation for cells
+                // Multi-state validation loop simulation for cells
                 let currentVal = parseInt(targetElement.innerText) || 0;
                 let nextVal = currentVal + 1;
                 if (nextVal > 9) nextVal = 1;
@@ -167,28 +192,28 @@
                 targetElement.classList.add('text-amber-400', 'font-bold');
                 sudokuState[index] = nextVal;
                 
-                // Disturb wave function to show constraint tracking adjustments
-                liveChart.data.datasets.data = Array(8).fill(0).map(() => Math.random() * 0.3);
-                liveChart.update();
+                // Distort probabilities tracking constraint space variance updates
+                currentQuantumProbabilities = Array(8).fill(0).map(() => Math.random() * 0.3);
+                drawNativeQuantumChart();
             } else if (currentActiveGame === 'mines') {
-                // If it's a fresh tile click, resolve its superposition state locally
+                // If it's a fresh hidden tile click, resolve its mine superposition locally
                 if (minesweeperState[index] === null) {
-                    const isMine = Math.random() > 0.82; // ~18% mine density configuration
+                    const isMine = Math.random() > 0.82; // ~18% target configuration mine density
                     if (isMine) {
                         minesweeperState[index] = 1;
                         targetElement.innerText = '💥';
                         targetElement.classList.add('bg-red-950', 'border-red-500');
                         alert("Quantum Mine Detonated! Local wave function collapsed into an invalid survival state.");
                         
-                        liveChart.data.datasets.data = [1.0, 0, 0, 0, 0, 0, 0, 0];
-                        liveChart.update();
+                        currentQuantumProbabilities = [1.0, 0, 0, 0, 0, 0, 0, 0];
+                        drawNativeQuantumChart();
                     } else {
                         minesweeperState[index] = 0;
                         targetElement.innerText = Math.floor(Math.random() * 3);
                         targetElement.classList.add('bg-slate-900', 'text-emerald-400', 'font-bold');
                         
-                        liveChart.data.datasets.data = Array(8).fill(0).map(() => Math.random() * 0.2);
-                        liveChart.update();
+                        currentQuantumProbabilities = Array(8).fill(0).map(() => Math.random() * 0.18);
+                        drawNativeQuantumChart();
                     }
                 }
             }
@@ -237,7 +262,10 @@
             
             document.getElementById('metric-entropy').innerText = "SUPERPOSITION ACTIVE";
             document.getElementById('metric-entropy').className = "text-purple-400 font-bold";
-            initObserverChart();
+            
+            // Re-seed flat equal probabilities upon system state mutations
+            currentQuantumProbabilities = [0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125];
+            drawNativeQuantumChart();
 
             // Toggle navigation button styles natively
             ['chess', 'sudoku', 'mines'].forEach(g => {
@@ -269,7 +297,7 @@
                     const tile = document.createElement('div');
                     tile.className = "quantum-tile bg-slate-800 border border-slate-700 rounded flex items-center justify-center text-xs font-mono text-slate-500 aspect-square cursor-pointer";
                     
-                    // Seed some initial hint values deterministically
+                    // Seed initial hint values deterministically to populate layout arrays
                     if (Math.random() > 0.8) {
                         const seededVal = Math.floor(Math.random() * 9) + 1;
                         tile.innerText = seededVal;
@@ -291,10 +319,12 @@
                 
                 viewport.className = "grid grid-cols-10 grid-rows-10 gap-1 bg-slate-950 p-4 rounded-lg aspect-square w-full max-w-md mx-auto";
                 viewport.innerHTML = '';
-                minesweeperState = Array(100).fill(null); // Reset layout to absolute superposition state
+                minesweeperState = Array(100).fill(null);
                 
                 for (let i = 0; i < 100; i++) {
                     const tile = document.createElement('div');
+                    const r = Math.floor(i / 10);
+                    const c = i % 10;
                     tile.className = "quantum-tile bg-slate-800 border border-slate-700 rounded flex items-center justify-center text-xs font-mono text-slate-500 aspect-square cursor-pointer";
                     tile.innerText = "?";
                     
@@ -307,17 +337,16 @@
         }
 
         function triggerGlobalMeasurement() {
-            if (!liveChart) return;
             console.log("Dispatched measurement operator to quantum simulation register via backend mapping.");
             
-            // Access through the embedded custom Chart structure seamlessly
-            liveChart.data.datasets.data = [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0];
-            liveChart.update();
+            // Mutate data array register and invoke native canvas compilation pipeline
+            currentQuantumProbabilities = [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0];
+            drawNativeQuantumChart();
             
             document.getElementById('metric-entropy').innerText = "SYSTEM COLLAPSED";
             document.getElementById('metric-entropy').className = "text-red-500 font-bold";
             
-            // Loop through active chess tiles to force collapse on all ghost states to prove the measurement
+            // Loop through active chess tiles to force collapse on all ghost states to prove measurement resolution
             if (currentActiveGame === 'chess') {
                 const tiles = document.getElementsByClassName('quantum-tile');
                 for (let tile of tiles) {
@@ -333,12 +362,12 @@
             setTimeout(() => panel.classList.remove('border-red-500'), 500);
         }
 
-        // High-fidelity standard document entrypoint mounting
+        // High-fidelity standard document entrypoint mounting and window scaling listener maps
         window.addEventListener('DOMContentLoaded', () => {
-            initObserverChart();
+            drawNativeQuantumChart();
             renderChessGrid();
         });
+        window.addEventListener('resize', drawNativeQuantumChart);
     </script>
 </body>
 </html>
-
