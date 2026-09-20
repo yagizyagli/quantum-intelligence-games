@@ -216,3 +216,31 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+# === Python & Virtual Environment Dependencies ===
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+.pytest_cache/
+.pypirc
+
+# === Data Science & Quantum Simulation Cache ===
+.ipynb_checkpoints/
+*.log
+.qiskit/
+
+# === Frontend / Node.js Dependencies ===
+frontend-demo/node_modules/
+frontend-demo/dist/
+frontend-demo/.env
+frontend-demo/.production
+
+# === Operating System & IDE Configurations ===
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
