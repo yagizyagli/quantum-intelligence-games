@@ -6,8 +6,8 @@
     <title>Quantum Intelligence Games Dashboard</title>
     <!-- Tailwind CSS CDN for high-fidelity responsive modern styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chart.js CDN for real-time Quantum Wave Function & Observer chart plotting -->
-    <script src="https://jsdelivr.net"></script>
+    <!-- Corrected & Validated Chart.js CDN Link via cdnjs (Stable v4.4.1) -->
+    <script src="https://cloudflare.com" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
         body {
             background-color: #0b0f19;
@@ -43,19 +43,21 @@
     <main class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
         
         <!-- Column 1 & 2: Interactive Game Canvas Viewport -->
-        <section class="lg:col-span-2 bg-slate-900 rounded-xl p-6 neon-border">
-            <div class="flex justify-between items-center mb-6 border-b border-slate-800 pb-4">
-                <h2 id="active-game-title" class="text-xl font-bold text-blue-400 tracking-wide">♟️ QUANTUM CHESS CORE VIEW</h2>
-                <div class="flex gap-2">
-                    <button onclick="switchGame('chess')" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 rounded text-xs font-semibold transition">Chess</button>
-                    <button onclick="switchGame('sudoku')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 rounded text-xs font-semibold transition">Sudoku</button>
-                    <button onclick="switchGame('mines')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 rounded text-xs font-semibold transition">Minesweeper</button>
+        <section class="lg:col-span-2 bg-slate-900 rounded-xl p-6 neon-border flex flex-col justify-between">
+            <div>
+                <div class="flex justify-between items-center mb-6 border-b border-slate-800 pb-4">
+                    <h2 id="active-game-title" class="text-xl font-bold text-blue-400 tracking-wide">♟️ QUANTUM CHESS CORE VIEW</h2>
+                    <div class="flex gap-2">
+                        <button onclick="switchGame('chess')" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 rounded text-xs font-semibold transition">Chess</button>
+                        <button onclick="switchGame('sudoku')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 rounded text-xs font-semibold transition">Sudoku</button>
+                        <button onclick="switchGame('mines')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 rounded text-xs font-semibold transition">Minesweeper</button>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Virtual Dynamic Board Container -->
-            <div id="board-viewport" class="grid grid-cols-8 gap-1 bg-slate-950 p-4 rounded-lg aspect-square max-w-md mx-auto">
-                <!-- Javascript dynamically injects tiles here based on the selected module state -->
+                <!-- Fixed Grid Layout: Explicitly grid-cols-8 and aspect-square mapping -->
+                <div id="board-viewport" class="grid grid-cols-8 grid-rows-8 gap-1 bg-slate-950 p-4 rounded-lg aspect-square w-full max-w-md mx-auto">
+                    <!-- Javascript will dynamically inject tiles here based on the selected module state -->
+                </div>
             </div>
         </section>
 
@@ -74,8 +76,8 @@
 
                 <!-- Real-time Chart Canvas Mapping -->
                 <h3 class="text-sm font-bold text-slate-400 mb-2 font-mono">Wave Function Probability Amplitude Matrix:</h3>
-                <div class="bg-slate-950 p-2 rounded-lg h-48 flex items-center justify-center relative">
-                    <canvas id="wave-function-chart"></canvas>
+                <div class="bg-slate-950 p-4 rounded-lg w-full h-48 relative flex items-center justify-center">
+                    <canvas id="wave-function-chart" class="w-full h-full"></canvas>
                 </div>
             </div>
 
@@ -90,11 +92,14 @@
 
     <!-- UI Core Automation Scripting -->
     <script>
-        let liveChart;
+        let liveChart = null;
 
         // Initialize Real-time Observer Charts mapping probabilistic data indices
         function initObserverChart() {
             const ctx = document.getElementById('wave-function-chart').getContext('2d');
+            if (liveChart) {
+                liveChart.destroy();
+            }
             liveChart = new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -123,22 +128,24 @@
 
         function renderChessGrid() {
             const viewport = document.getElementById('board-viewport');
-            viewport.className = "grid grid-cols-8 gap-1 bg-slate-950 p-4 rounded-lg aspect-square max-w-md mx-auto";
+            viewport.className = "grid grid-cols-8 grid-rows-8 gap-1 bg-slate-950 p-4 rounded-lg aspect-square w-full max-w-md mx-auto";
             viewport.innerHTML = '';
             
+            // Render an elegant setup showcasing quantum state map deployment
             for (let i = 0; i < 64; i++) {
                 const tile = document.createElement('div');
                 const row = Math.floor(i / 8);
                 const col = i % 8;
                 const isDark = (row + col) % 2 === 1;
                 
-                tile.className = `quantum-tile flex items-center justify-center font-bold text-xs h-10 w-10 sm:h-12 sm:w-12 rounded ${isDark ? 'bg-slate-800 text-slate-400' : 'bg-slate-700 text-slate-300'}`;
+                tile.className = `quantum-tile flex items-center justify-center font-bold text-xs aspect-square rounded cursor-pointer ${isDark ? 'bg-slate-800 text-slate-400' : 'bg-slate-700 text-slate-300'}`;
                 
+                // Show pieces configurations
                 if (i === 0) tile.innerText = 'wR';
                 if (i === 4) tile.innerText = 'wK';
                 if (i === 18) {
-                    tile.innerText = 'wP?'; 
-                    tile.classList.add('bg-blue-900', 'text-blue-300', 'border', 'border-blue-400');
+                    tile.innerText = 'wP?'; // Piece in superposition state
+                    tile.className += ' bg-blue-900 text-blue-300 border border-blue-500';
                 }
                 viewport.appendChild(tile);
             }
@@ -155,43 +162,28 @@
                 systemMetric.innerText = "Chessboard";
                 spaceMetric.innerText = "2^64 Dimensions";
                 renderChessGrid();
-                liveChart.data.labels = ['Tile 1', 'Tile 2', 'Tile 3', 'Tile 4', 'Tile 5', 'Tile 6', 'Tile 7', 'Tile 8'];
-                liveChart.data.datasets[0].data = [0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125];
-                liveChart.update();
             } else if(gameType === 'sudoku') {
                 title.innerText = "🧩 QUANTUM SUDOKU MATRIX";
                 systemMetric.innerText = "9x9x9 Tensor Grid";
                 spaceMetric.innerText = "9^81 States";
                 
-                viewport.className = "grid grid-cols-9 gap-1 bg-slate-950 p-4 rounded-lg aspect-square max-w-md mx-auto";
+                viewport.className = "grid grid-cols-9 grid-rows-9 gap-1 bg-slate-950 p-4 rounded-lg aspect-square w-full max-w-md mx-auto";
                 viewport.innerHTML = '';
                 for (let i = 0; i < 81; i++) {
                     const tile = document.createElement('div');
-                    tile.className = "quantum-tile flex items-center justify-center font-mono text-xs bg-slate-800 text-indigo-300 border border-slate-700 rounded h-8 w-8";
-                    if (Math.random() > 0.7) {
-                        tile.innerText = Math.floor(Math.random() * 9) + 1;
-                        tile.className = "quantum-tile flex items-center justify-center font-mono text-xs bg-slate-900 text-slate-400 border border-slate-800 rounded h-8 w-8 font-bold";
-                    } else {
-                        tile.innerText = '?';
-                    }
+                    tile.className = "quantum-tile bg-slate-800 border border-slate-700 rounded flex items-center justify-center text-xs font-mono text-slate-400 aspect-square cursor-pointer";
+                    tile.innerText = (Math.random() > 0.7) ? Math.floor(Math.random() * 9) + 1 : "?";
                     viewport.appendChild(tile);
                 }
-                liveChart.data.labels = ['Val 1', 'Val 2', 'Val 3', 'Val 4', 'Val 5', 'Val 6', 'Val 7', 'Val 8', 'Val 9'];
-                liveChart.data.datasets[0].data = [0.3, 0.1, 0.05, 0.15, 0.2, 0.05, 0.05, 0.05, 0.05];
-                liveChart.update();
             } else if(gameType === 'mines') {
                 title.innerText = "🛑 QUANTUM MINESWEEPER FIELD";
                 systemMetric.innerText = "Probabilistic Minefield";
                 spaceMetric.innerText = "2^100 Permutations";
-                
-                // Dynamically build a highly optimized 10x10 grid canvas space for Minesweeper
-                const viewport = document.getElementById('board-viewport');
-                viewport.className = "grid grid-cols-10 gap-1 bg-slate-950 p-4 rounded-lg aspect-square max-w-md mx-auto";
+                                viewport.className = "grid grid-cols-10 grid-rows-10 gap-1 bg-slate-950 p-4 rounded-lg aspect-square w-full max-w-md mx-auto";
                 viewport.innerHTML = '';
-                
                 for (let i = 0; i < 100; i++) {
                     const tile = document.createElement('div');
-                    tile.className = "quantum-tile bg-slate-800 border border-slate-700 rounded flex items-center justify-center text-xs font-mono text-slate-500 cursor-pointer";
+                    tile.className = "quantum-tile bg-slate-800 border border-slate-700 rounded flex items-center justify-center text-xs font-mono text-slate-500 aspect-square cursor-pointer";
                     tile.innerText = "?";
                     viewport.appendChild(tile);
                 }
@@ -220,3 +212,4 @@
     </script>
 </body>
 </html>
+
