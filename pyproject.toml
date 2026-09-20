@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quantum-intelligence-games"
+version = "1.0.0"
+description = "A high-performance, lightweight quantum computing board games suite powered by Quantum Machine Learning (QML) core engines."
+readme = "README.md"
+authors = [
+    { name = "Yağız Yağlı"}
+]
+license = { text = "MIT" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Games/Entertainment :: Board Games",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "numpy>=1.22.0",
+    "pennylane>=0.30.0",
+    "flask>=2.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/yagizyagli/quantum-intelligence-games"
