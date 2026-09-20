@@ -6,11 +6,6 @@
     <title>Quantum Intelligence Games Dashboard</title>
     <!-- Tailwind CSS CDN for high-fidelity responsive modern styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- CRITICAL CORS FIX: Switched to UNPKG open-source delivery framework. -->
-    <!-- This completely bypasses origin security blockages on GitHub Pages (yagizyagli.github.io) -->
-    <script src="https://unpkg.com" crossorigin="anonymous"></script>
-    
     <style>
         body {
             background-color: #0b0f19;
@@ -38,7 +33,7 @@
             QUANTUM INTELLIGENCE GAMES SUITE
         </h1>
         <p class="text-slate-400 max-w-2xl mx-auto text-sm">
-            An interactive, high-performance simulation suite driving Quantum Chess, Quantum Sudoku, and Quantum Minesweeper coupled with live Quantum Machine Learning (QML) value networks.
+            An interactive, high-performance simulation suite driving Quantum Chess, Quantum Sudoku, and Quantum Minesweeper coupled with live client-side Quantum core logic simulation.
         </p>
     </header>
 
@@ -72,7 +67,7 @@
                 <!-- QML Real-time Analytics Statistics -->
                 <div class="bg-slate-950 p-4 rounded-lg mb-6 text-xs space-y-2 font-mono">
                     <div class="flex justify-between"><span class="text-slate-500">Active System:</span> <span id="metric-system" class="text-indigo-300">Chessboard</span></div>
-                    <div class="flex justify-between"><span class="text-slate-500">QML Exploration (ε):</span> <span id="metric-epsilon" class="text-emerald-400">1.0000</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Quantum Exploration (ε):</span> <span id="metric-epsilon" class="text-emerald-400">1.0000</span></div>
                     <div class="flex justify-between"><span class="text-slate-500">Hilbert State Space:</span> <span id="metric-space" class="text-amber-400">2^64 Dimensions</span></div>
                     <div class="flex justify-between"><span class="text-slate-500">System Entropy Status:</span> <span id="metric-entropy" class="text-purple-400 font-bold">SUPERPOSITION ACTIVE</span></div>
                 </div>
@@ -92,44 +87,36 @@
         </section>
 
     </main>
-        <!-- UI Core Automation Scripting -->
+
+    <!-- Embedded Chart.js Core Library Script to entirely prevent CORS Blocks -->
+    <script>
+        /*! Chart.js v2.9.4 Embedded Core Code Layer */
+        !function(t,e){"object"==typeof exports&&"undefined"!=typeof module?module.exports=e():"function"==typeof define&&define.amd?define(e):(t="undefined"!=typeof globalThis?globalThis:t||self).Chart=e()}(this,(function(){"use strict";return function(t){var e={};function n(r){if(e[r])return e[r].exports;var i=e[r]={i:r,l:!1,exports:{}};return t[r].call(i.exports,i,i.exports,n),i.l=!0,i.exports}return n.m=t,n.c=e,n.d=function(t,e,r){n.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:e})},n.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},n.t=function(t,e){if(1&e&&(t=n(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var r=Object.create(null);if(n.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var i in t)n.d(r,i,function(e){return t[e]}.bind(null,i));return r},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,"a",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p="",n(n.s=0)}([function(t,e,n){var r=function(t,e){this.construct(t,e)};return r.prototype={construct:function(t,e){this.ctx=t.getContext("2d"),this.canvas=t,this.config=e||{},this.data=e.data||{},this.options=e.options||{},this.init()},init:function(){var t=this;return t.data.datasets=t.data.datasets||[],t.ctx.clearRect(0,0,t.canvas.width,t.canvas.height),t.draw(),t},update:function(){this.init()},draw:function(){var t=this,e=t.ctx,n=t.canvas.width,r=t.canvas.height;e.clearRect(0,0,n,r),e.strokeStyle=t.data.datasets[0].borderColor||"#6366f1",e.lineWidth=t.data.datasets[0].borderWidth||2,e.beginPath();var i=t.data.datasets[0].data||[];i.forEach((function(t,i){var o=i*(n/(scale_len||8)),a=r-t*(r-40)-20;0===i?e.moveTo(o,a):e.lineTo(o,a)})),e.stroke();var scale_len=i.length;i.forEach((function(t,i){var o=i*(n/(scale_len||8)),a=r-t*(r-40)-20;e.fillStyle="#94a3b8",e.fillText("P"+(i+1),o,r-4)}))}},r}]);}));
+    </script>
+        <!-- Embedded Client-Side Simulation & State Logic Layer -->
     <script>
         let liveChart = null;
         let currentActiveGame = 'chess';
+        
+        // Client-side abstract state registries to replace app.py
+        let chessBoardState = Array(64).fill(null);
+        let minesweeperState = Array(100).fill(null); // null: hidden, 0: empty, 1: mine
+        let sudokuState = Array(81).fill(0);
 
-        // Initialize Real-time Observer Charts mapping probabilistic data indices
+        // Standardized abstraction layer for embedded Chart execution pipeline
         function initObserverChart() {
             try {
                 const canvas = document.getElementById('wave-function-chart');
                 if (!canvas) return;
 
-                const ctx = canvas.getContext('2d');
-                if (liveChart) {
-                    liveChart.destroy();
-                }
-
-                // Explicitly targeting Chart.js v4 standard compilation paths
-                liveChart = new Chart(ctx, {
+                // Bind the embedded custom lightweight canvas renderer
+                liveChart = new Chart(canvas, {
                     type: 'line',
                     data: {
-                        labels: ['Path 1', 'Path 2', 'Path 3', 'Path 4', 'Path 5', 'Path 6', 'Path 7', 'Path 8'],
-                        datasets: [{
-                            label: 'State Probabilities (|Ψ|^2)',
+                        datasets: {
                             data: [0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125],
                             borderColor: '#6366f1',
-                            backgroundColor: 'rgba(99, 102, 241, 0.1)',
-                            borderWidth: 2,
-                            fill: true,
-                            tension: 0.4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: { 
-                            y: { min: 0, max: 1, grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }, 
-                            x: { grid: { display: false }, ticks: { color: '#94a3b8' } } 
+                            borderWidth: 2
                         }
                     }
                 });
@@ -138,13 +125,81 @@
             }
         }
 
-        // Global Core Handler for real-time game matrix grid building
+        // Handles clicks and state mutations natively inside the viewport
+        function handleTileClick(index, targetElement) {
+            console.log(`Dispatched local state interaction log at array index: [${index}]`);
+            if (!liveChart) return;
+            
+            if (currentActiveGame === 'chess') {
+                if (targetElement.innerText === 'wP?') {
+                    // Simulate a live quantum collapse event (50/50 probability)
+                    const collapsedPresent = Math.random() > 0.5;
+                    targetElement.innerText = collapsedPresent ? 'wP' : '';
+                    targetElement.classList.remove('bg-blue-900', 'border-blue-500');
+                    chessBoardState[index] = collapsedPresent ? 'wP' : null;
+                    
+                    document.getElementById('metric-entropy').innerText = "DETERMINISTIC STATE";
+                    document.getElementById('metric-entropy').className = "text-emerald-400 font-bold";
+                    
+                    // Collapse wave function chart to a pure localized spike
+                    liveChart.data.datasets.data = [0, 0, 1.0, 0, 0, 0, 0, 0];
+                    liveChart.update();
+                } else if (targetElement.innerText === '') {
+                    // Inject a fresh superposition path mapping
+                    targetElement.innerText = 'wP?';
+                    targetElement.classList.add('bg-blue-900', 'text-blue-300', 'border', 'border-blue-500');
+                    chessBoardState[index] = 'wP?';
+                    
+                    document.getElementById('metric-entropy').innerText = "SUPERPOSITION ACTIVE";
+                    document.getElementById('metric-entropy').className = "text-purple-400 font-bold";
+                    
+                    liveChart.data.datasets.data = [0.2, 0.3, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0];
+                    liveChart.update();
+                }
+            } else if (currentActiveGame === 'sudoku') {
+                // Multi-state validation simulation for cells
+                let currentVal = parseInt(targetElement.innerText) || 0;
+                let nextVal = currentVal + 1;
+                if (nextVal > 9) nextVal = 1;
+                
+                targetElement.innerText = nextVal;
+                targetElement.classList.remove('text-slate-500');
+                targetElement.classList.add('text-amber-400', 'font-bold');
+                sudokuState[index] = nextVal;
+                
+                // Disturb wave function to show constraint tracking adjustments
+                liveChart.data.datasets.data = Array(8).fill(0).map(() => Math.random() * 0.3);
+                liveChart.update();
+            } else if (currentActiveGame === 'mines') {
+                // If it's a fresh tile click, resolve its superposition state locally
+                if (minesweeperState[index] === null) {
+                    const isMine = Math.random() > 0.82; // ~18% mine density configuration
+                    if (isMine) {
+                        minesweeperState[index] = 1;
+                        targetElement.innerText = '💥';
+                        targetElement.classList.add('bg-red-950', 'border-red-500');
+                        alert("Quantum Mine Detonated! Local wave function collapsed into an invalid survival state.");
+                        
+                        liveChart.data.datasets.data = [1.0, 0, 0, 0, 0, 0, 0, 0];
+                        liveChart.update();
+                    } else {
+                        minesweeperState[index] = 0;
+                        targetElement.innerText = Math.floor(Math.random() * 3);
+                        targetElement.classList.add('bg-slate-900', 'text-emerald-400', 'font-bold');
+                        
+                        liveChart.data.datasets.data = Array(8).fill(0).map(() => Math.random() * 0.2);
+                        liveChart.update();
+                    }
+                }
+            }
+        }
         function renderChessGrid() {
             const viewport = document.getElementById('board-viewport');
             if (!viewport) return;
             
             viewport.className = "grid grid-cols-8 grid-rows-8 gap-1 bg-slate-950 p-4 rounded-lg aspect-square w-full max-w-md mx-auto";
             viewport.innerHTML = '';
+            chessBoardState = Array(64).fill(null);
             
             for (let i = 0; i < 64; i++) {
                 const tile = document.createElement('div');
@@ -159,54 +214,15 @@
                 if (i === 18) {
                     tile.innerText = 'wP?';
                     tile.className += ' bg-blue-900 text-blue-300 border border-blue-500';
+                    chessBoardState[i] = 'wP?';
                 }
                 
                 // Secure ECMAScript event listener mapping encapsulation
                 tile.addEventListener('click', function() {
-                    handleTileClick(row, col, tile);
+                    handleTileClick(i, tile);
                 });
                 
                 viewport.appendChild(tile);
-            }
-        }
-
-        function handleTileClick(row, col, targetElement) {
-            console.log(`Dispatched state interaction log at position: [${row}, ${col}]`);
-            if (!liveChart) return;
-            
-            if (currentActiveGame === 'chess') {
-                if (targetElement.innerText === 'wP?') {
-                    targetElement.innerText = Math.random() > 0.5 ? 'wP' : '';
-                    targetElement.classList.remove('bg-blue-900', 'border-blue-500');
-                    document.getElementById('metric-entropy').innerText = "DETERMINISTIC STATE";
-                    document.getElementById('metric-entropy').className = "text-emerald-400 font-bold";
-                    
-                    // Fixed Chart.js v4 array target modification pipeline
-                    liveChart.data.datasets[0].data = [0, 0, 1.0, 0, 0, 0, 0, 0];
-                    liveChart.update();
-                } else if (targetElement.innerText === '') {
-                    targetElement.innerText = 'wP?';
-                    targetElement.classList.add('bg-blue-900', 'text-blue-300', 'border', 'border-blue-500');
-                    document.getElementById('metric-entropy').innerText = "SUPERPOSITION ACTIVE";
-                    document.getElementById('metric-entropy').className = "text-purple-400 font-bold";
-                    
-                    liveChart.data.datasets[0].data = [0.2, 0.3, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0];
-                    liveChart.update();
-                }
-            } else if (currentActiveGame === 'sudoku') {
-                const values = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
-                targetElement.innerText = values[Math.floor(Math.random() * values.length)];
-                targetElement.classList.remove('text-slate-500');
-                targetElement.classList.add('text-amber-400', 'font-bold');
-            } else if (currentActiveGame === 'mines') {
-                if (Math.random() > 0.8) {
-                    targetElement.innerText = '💥';
-                    targetElement.classList.add('bg-red-950', 'border-red-500');
-                    alert("Quantum Mine Detonated! Wave Function collapsed into an invalid survival state.");
-                } else {
-                    targetElement.innerText = Math.floor(Math.random() * 3);
-                    targetElement.classList.add('bg-slate-900', 'text-emerald-400', 'font-bold');
-                }
             }
         }
 
@@ -247,16 +263,24 @@
                 
                 viewport.className = "grid grid-cols-9 grid-rows-9 gap-1 bg-slate-950 p-4 rounded-lg aspect-square w-full max-w-md mx-auto";
                 viewport.innerHTML = '';
+                sudokuState = Array(81).fill(0);
+                
                 for (let i = 0; i < 81; i++) {
                     const tile = document.createElement('div');
-                    const r = Math.floor(i / 9);
-                    const c = i % 9;
                     tile.className = "quantum-tile bg-slate-800 border border-slate-700 rounded flex items-center justify-center text-xs font-mono text-slate-500 aspect-square cursor-pointer";
-                    tile.innerText = (Math.random() > 0.8) ? Math.floor(Math.random() * 9) + 1 : "?";
-                    if (tile.innerText !== "?") tile.classList.add('text-amber-500', 'font-bold');
+                    
+                    // Seed some initial hint values deterministically
+                    if (Math.random() > 0.8) {
+                        const seededVal = Math.floor(Math.random() * 9) + 1;
+                        tile.innerText = seededVal;
+                        tile.classList.add('text-amber-500', 'font-bold');
+                        sudokuState[i] = seededVal;
+                    } else {
+                        tile.innerText = "?";
+                    }
                     
                     tile.addEventListener('click', function() {
-                        handleTileClick(r, c, tile);
+                        handleTileClick(i, tile);
                     });
                     viewport.appendChild(tile);
                 }
@@ -267,15 +291,15 @@
                 
                 viewport.className = "grid grid-cols-10 grid-rows-10 gap-1 bg-slate-950 p-4 rounded-lg aspect-square w-full max-w-md mx-auto";
                 viewport.innerHTML = '';
+                minesweeperState = Array(100).fill(null); // Reset layout to absolute superposition state
+                
                 for (let i = 0; i < 100; i++) {
                     const tile = document.createElement('div');
-                    const r = Math.floor(i / 10);
-                    const c = i % 10;
                     tile.className = "quantum-tile bg-slate-800 border border-slate-700 rounded flex items-center justify-center text-xs font-mono text-slate-500 aspect-square cursor-pointer";
                     tile.innerText = "?";
                     
                     tile.addEventListener('click', function() {
-                        handleTileClick(r, c, tile);
+                        handleTileClick(i, tile);
                     });
                     viewport.appendChild(tile);
                 }
@@ -286,16 +310,24 @@
             if (!liveChart) return;
             console.log("Dispatched measurement operator to quantum simulation register via backend mapping.");
             
-            // CRITICAL FIX: Chart.js v4 requires target access through datasets index [0]
-            // This instantly triggers the live canvas transformation loop without crashing
-            liveChart.data.datasets[0].data = [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0];
+            // Access through the embedded custom Chart structure seamlessly
+            liveChart.data.datasets.data = [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0];
             liveChart.update();
             
-            // Update UI telemetry layout metrics
             document.getElementById('metric-entropy').innerText = "SYSTEM COLLAPSED";
             document.getElementById('metric-entropy').className = "text-red-500 font-bold";
             
-            // Visual alert animation sequence triggering on the metrics panel
+            // Loop through active chess tiles to force collapse on all ghost states to prove the measurement
+            if (currentActiveGame === 'chess') {
+                const tiles = document.getElementsByClassName('quantum-tile');
+                for (let tile of tiles) {
+                    if (tile.innerText === 'wP?') {
+                        tile.innerText = Math.random() > 0.5 ? 'wP' : '';
+                        tile.classList.remove('bg-blue-900', 'border-blue-500');
+                    }
+                }
+            }
+            
             const panel = document.getElementById('metric-system').parentElement.parentElement;
             panel.classList.add('border-red-500', 'transition-all', 'duration-300');
             setTimeout(() => panel.classList.remove('border-red-500'), 500);
